@@ -1,0 +1,44 @@
+{
+  "name": "@saulwalltech/faq-forge",
+  "version": "0.1.0",
+  "description": "Generic engine for building filtered FAQ views (public/user/custom audiences) from a single YAML source.",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format esm,cjs && tsc --emitDeclarationOnly --declaration --outDir dist",
+    "test": "vitest run",
+    "lint": "tsc --noEmit"
+  },
+  "keywords": [
+    "faq",
+    "yaml",
+    "content",
+    "shared-content"
+  ],
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": "Syamanthaka (https://github.com/sigmabeta298)",
+  "devDependencies": {
+    "@types/js-yaml": "^4.0.9",
+    "@types/node": "^26.1.2",
+    "js-yaml": "^5.2.3",
+    "tsup": "^8.5.1",
+    "typescript": "^7.0.2",
+    "vitest": "^4.1.10",
+    "zod": "^4.4.3"
+  }
+}
