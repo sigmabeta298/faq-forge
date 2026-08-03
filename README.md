@@ -76,6 +76,10 @@ Exports `FaqItem`, `FaqSection`, `FaqGroup`, `FaqDocument` — TypeScript types 
 
 ## License
 
-MIT
+MIT License
 
-__Author__: Syamanthaka (https://github.com/sigmabeta298)
+Copyright (c) 2026 Syamanthaka B
+
+---
+
+Built by [Syamanthaka, SaulwallTech](https://github.com/sigmabeta298) — feedback and PRs welcome.
