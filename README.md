@@ -49,26 +49,52 @@ import { loadFaqFromFile, getAudience } from "@saulwalltech/faq-forge";
 const faq = loadFaqFromFile("./faq.yaml");
 
 export const publicFaq = getAudience(faq, "public");
+
 export const userFaq = getAudience(faq, "users");
 ```
 
-### Any environment (already-parsed object)
-```ts
-import { parseFaq, getAudience } from "@saulwalltech/faq-forge";
-import yaml from "js-yaml";
+### Browser / Cloudflare Workers (already-parsed object)
 
-const rawObject = yaml.load(yamlString);
+For browser, Cloudflare Workers, and other non-Node environments, use the `/browser` entry point. It does not include Node.js-only modules such as `fs`.
+
+```ts
+import { parseFaq, getAudience } from "@saulwalltech/faq-forge/browser";
+
+const rawObject = /* your parsed YAML object */;
+
 const faq = parseFaq(rawObject);
 
 const publicFaq = getAudience(faq, "public");
 ```
 
+You can use any YAML parser appropriate for your environment to produce the `rawObject` passed to `parseFaq`.
+
+### Node (already-parsed object)
+
+If you already have a parsed object in Node, the root package can also be used:
+
+```ts
+import { parseFaq, getAudience } from "@saulwalltech/faq-forge";
+
+const rawObject = /* your parsed YAML object */;
+
+const faq = parseFaq(rawObject);
+
+const publicFaq = getAudience(faq, "public");
+```
+
+The root package continues to expose the full API for backward compatibility.
+
 ## API
 
-- `parseFaq(rawObject: unknown): FaqDocument` — validates a raw parsed object against the schema. Throws a descriptive error on invalid input.
-- `loadFaqFromFile(filePath: string): FaqDocument` — Node-only convenience: reads + parses + validates a YAML file in one call.
-- `getAudience(faq: FaqDocument, audienceKey: string): FaqGroup` — returns the FAQ sections for a given audience. Throws if the audience doesn't exist.
-- `listAudiences(faq: FaqDocument): string[]` — lists all audience keys present in the document.
+* `parseFaq(rawObject: unknown): FaqDocument` — validates a raw parsed object against the schema. Throws a descriptive error on invalid input. Available from both `@saulwalltech/faq-forge` and the browser-safe `@saulwalltech/faq-forge/browser` entry point.
+
+* `loadFaqFromFile(filePath: string): FaqDocument` — Node-only convenience: reads + parses + validates a YAML file in one call. Available from `@saulwalltech/faq-forge`.
+
+* `getAudience(faq: FaqDocument, audienceKey: string): FaqGroup` — returns the FAQ sections for a given audience. Throws if the audience doesn't exist.
+
+* `listAudiences(faq: FaqDocument): string[]` — lists all audience keys present in the document.
+
 
 ## Types
 

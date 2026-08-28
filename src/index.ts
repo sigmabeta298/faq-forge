@@ -12,5 +12,6 @@ export type {
   FaqDocument,
 } from "./schema.js";
 
-export { parseFaq, loadFaqFromFile } from "./parse.js";
+export { parseFaq } from "./parse.js";
+export { loadFaqFromFile } from "./node.js";
 export { getAudience, listAudiences } from "./audience.js";
